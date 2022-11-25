@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(() => ({
   root: {
@@ -14,6 +14,7 @@ export default makeStyles(() => ({
   },
   cardContent: {
     display: "flex",
-    justifyContent: "space-betwenn",
+    justifyContent: "space-between",
+    height: "72px",
   },
 }));

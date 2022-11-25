@@ -21,8 +21,8 @@ const Product = ({ product, onAddToCart }) => {
         title={product.name}
       />
       <CardContent>
-        <div className={classes.CardContent}>
-          <Typography variant="h5" gutterBottom>
+        <div className={classes.cardContent}>
+          <Typography variant="h6" gutterBottom>
             {product.name}
           </Typography>
           <Typography variant="h6" gutterBottom>
@@ -30,7 +30,9 @@ const Product = ({ product, onAddToCart }) => {
           </Typography>
         </div>
         <Typography
-          dangerouslySetInnerHTML={{ __html: product.description }}
+          dangerouslySetInnerHTML={{
+            __html: product.description.substring(0, 99) + "...",
+          }}
           variant="body2"
           color="textSecondary"
         />

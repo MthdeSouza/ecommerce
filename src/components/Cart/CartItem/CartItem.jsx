@@ -21,9 +21,17 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
         alt={item.name}
         className={classes.media}
       />
-      <CardContent className={classes.cardContent}>
-        <Typography variant="h4">{item.name}</Typography>
-        <Typography variant="h5">{item.price.formatted_with_symbol}</Typography>
+      <CardContent>
+        <div className={classes.cardContent}>
+          {" "}
+          <Typography variant="h6">{item.name}</Typography>
+          <Typography variant="h6" color="textSecondary">
+            {item.line_total.formatted_with_symbol}
+          </Typography>
+        </div>
+        <Typography variant="subtitle2">
+          {item.price.formatted_with_symbol}
+        </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <div className={classes.buttons}>
@@ -49,7 +57,7 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
           color="secondary"
           onClick={() => onRemoveFromCart(item.id)}
         >
-          Remove
+          Remover
         </Button>
       </CardActions>
     </Card>

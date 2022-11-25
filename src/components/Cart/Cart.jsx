@@ -13,10 +13,10 @@ const Cart = ({
   const classes = useStyles();
 
   const EmptyCart = () => (
-    <Typography variant="h6">
-      You have no items,
+    <Typography variant="h5">
+      Você ainda não adicionou itens no carrinho,
       <Link to="/" className={classes.link}>
-        &nbsp;start adding some
+        &nbsp;vamos começar
       </Link>
       !
     </Typography>
@@ -36,7 +36,7 @@ const Cart = ({
         ))}
       </Grid>
       <div className={classes.cardDetails}>
-        <Typography variant="h4">
+        <Typography variant="h4" color="textSecondary">
           Subtotal: {cart.subtotal.formatted_with_symbol}
         </Typography>
         <div>
@@ -48,7 +48,7 @@ const Cart = ({
             color="secondary"
             onClick={handleEmptyCart}
           >
-            Empty Cart
+            Limpar carrinho
           </Button>
           <Button
             className={classes.checkout}
@@ -63,14 +63,14 @@ const Cart = ({
       </div>
     </>
   );
-  console.log(cart);
+
   if (!cart || cart === {}) return "Loading...";
 
   return (
     <Container>
       <div className={classes.toolbar} />
-      <Typography className={classes.title} variant="h3" gutterBottom>
-        Your shopping cart
+      <Typography className={classes.title} variant="h4" gutterBottom>
+        Carrinho de compras
       </Typography>
       {!cart?.line_items?.length ? <EmptyCart /> : <FilledCart />}
     </Container>
