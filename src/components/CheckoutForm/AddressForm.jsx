@@ -85,7 +85,7 @@ const AddressForm = ({ checkoutToken, next }) => {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Shipping Address
+        Endereço de entrega
       </Typography>
       <FormProvider {...methods}>
         <form
