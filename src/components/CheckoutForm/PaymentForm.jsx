@@ -10,7 +10,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import Review from "./Review";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-console.log(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
 const PaymentForm = ({
   shippingData,
   checkoutToken,
@@ -22,34 +22,38 @@ const PaymentForm = ({
     event.preventDefault();
 
     if (!stripe || !elements) return;
+
     const cardElement = elements.getElement(CardElement);
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     });
 
     if (error) {
-      console.log(error);
+      console.log("[error]", error);
     } else {
       const orderData = {
         line_items: checkoutToken.line_items,
         customer: {
           firstname: shippingData.firstName,
-          lastname: shippingData.lastname,
+          lastname: shippingData.lastName,
           email: shippingData.email,
         },
         shipping: {
-          name: "Primary",
+          name: "Domestic",
           street: shippingData.address1,
           town_city: shippingData.city,
           county_state: shippingData.shippingSubdivision,
           postal_zip_code: shippingData.zip,
           country: shippingData.shippingCountry,
         },
-        fullfillment: { shipping_method: shippingData.shippingOption },
+        fulfillment: { shipping_method: shippingData.shippingOption },
         payment: {
           gateway: "stripe",
-          stripe: { payment_method_id: paymentMethod.id },
+          stripe: {
+            payment_method_id: paymentMethod.id,
+          },
         },
       };
 
@@ -67,9 +71,7 @@ const PaymentForm = ({
       </Typography>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
-          {(elements, stripe) => {
-            console.log("stripe", stripe);
-            console.log("elements", elements);
+          {({ elements, stripe }) => {
             return (
               <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
                 <CardElement />
